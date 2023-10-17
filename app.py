@@ -4,7 +4,6 @@ from chatbot import get_chat_response
 
 st.title("Duc Kinh LE TRAN's AI Assistant")
 
-
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
