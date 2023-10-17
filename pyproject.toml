@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ai-assistant"
+version = "0.1.0"
+description = ""
+authors = ["Duc Kinh LE TRAN <duckinh.letran@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.27.2"
+langchain = "^0.0.315"
+google-cloud-aiplatform = "^1.35.0"
+openai = "^0.28.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+black = "^23.9.1"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+jupyterlab = "^4.0.7"
+pyhamcrest = "^2.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
