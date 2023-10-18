@@ -7,22 +7,19 @@ from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 from chatbot import get_chat_response
 
-GCP_PROJECT_ID = "test_project"
 MODEL_NAME = "chat-bison@001"
 
 
 @pytest.fixture(autouse=True)
 def patch_env():
-    with mock.patch.dict(
-        os.environ, {"GCP_PROJECT_ID": "test_project", "MODEL_NAME": MODEL_NAME}
-    ):
+    with mock.patch.dict(os.environ, {"MODEL_NAME": MODEL_NAME}):
         yield
 
 
 @mock.patch("chatbot.ChatVertexAI")
 def test_get_chat_response_init_chat_model_with_correct_params(chat_model):
     get_chat_response([])
-    chat_model.assert_called_with(project=GCP_PROJECT_ID, model_name=MODEL_NAME)
+    chat_model.assert_called_with(model_name=MODEL_NAME)
 
 
 @mock.patch("chatbot.ChatVertexAI")

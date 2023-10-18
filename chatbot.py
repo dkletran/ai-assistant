@@ -12,9 +12,7 @@ def _make_langchain_message(message):
 
 
 def get_chat_response(chat_history):
-    chat = ChatVertexAI(
-        project=os.environ["GCP_PROJECT_ID"], model_name=os.environ["MODEL_NAME"]
-    )
+    chat = ChatVertexAI(model_name=os.environ["MODEL_NAME"])
     with open("./prompt.txt") as f:
         prompt = f.read()
     system_message = SystemMessage(content=prompt)
