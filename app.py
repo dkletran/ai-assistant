@@ -2,7 +2,7 @@ import streamlit as st
 
 from chatbot import get_chat_response
 
-st.title("Duc Kinh LE TRAN's AI Assistant")
+st.title("Chat with my AI Assistant")
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -23,8 +23,8 @@ if prompt := st.chat_input("How can I help you?"):
 
 # Display assistant response in chat message container
 if prompt:
-    response = get_chat_response(st.session_state.messages)
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant"), st.spinner("..."):
+        response = get_chat_response(st.session_state.messages)
         st.markdown(response)
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
