@@ -1,0 +1,24 @@
+steps:
+  - id: unittest
+    name: 'python:3.11.6-slim-bullseye'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      pip install poetry \
+      && poetry install \
+      && cd src/ \
+      && poetry run pytest \
+  - id: build-push-docker-image
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--pull', '-t', 'europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${BUILD_ID}', '.']
+  - id: deploy-infra
+    name: 'hashicorp/terraform'
+    entrypoint: 'sh'
+    args: 
+    - '-c'
+    - |
+      cd terraform \
+      && terraform init \
+      && terraform apply --auto-approve -var="image_tag=${BUILD_ID}"
+images: ['europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${BUILD_ID}']
