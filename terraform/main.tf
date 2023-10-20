@@ -26,6 +26,10 @@ resource "google_cloud_run_service" "default" {
         ports {
           container_port = 8501
         }
+        env {
+          name  = "OPENAI_API_KEY"
+          value = data.google_secret_manager_secret_version.openai_api_key.secret_data
+        }
       }
       service_account_name = google_service_account.service_account.account_id
     }
