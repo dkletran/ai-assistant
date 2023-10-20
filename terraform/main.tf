@@ -12,12 +12,12 @@ resource "google_project_iam_binding" "sa_binding" {
 resource "google_cloud_run_service" "default" {
   project  = "ai-assistant-399819"
   name     = "ai-assistant"
-  location = "europe-west9"
+  location = "europe-west1"
 
   template {
     spec {
       containers {
-        image = "europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${var.image_tag}"
+        image = "europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${var.image_tag}"
         ports {
           container_port = 8501
         }
