@@ -8,19 +8,15 @@ steps:
       poetry run pytest
   - id: build-push-docker-image
     name: "gcr.io/cloud-builders/docker"
-    args:
-      [
-        "build",
-        "--pull",
-        "-t",
-        "europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA",
-        ".",
-      ]
+    script: |
+      docker build --pull -t europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA .
+      docker push europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA
   - id: deploy-infra
     name: "hashicorp/terraform"
     script: |
       cd terraform 
       terraform init 
       terraform apply --auto-approve -var="image_tag=$COMMIT_SHA"
-images:
-  - europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA
+options:
+  env:
+    - "COMMIT_SHA=$COMMIT_SHA"
