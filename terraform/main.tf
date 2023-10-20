@@ -13,7 +13,12 @@ resource "google_cloud_run_service" "default" {
   project  = "ai-assistant-399819"
   name     = "ai-assistant"
   location = "europe-west1"
-
+  metadata {
+    namespace = "ai-assistant-399819"
+    annotations = {
+      "autoscaling.knative.dev/maxScale" = "5"
+    }
+  }
   template {
     spec {
       containers {
@@ -25,7 +30,6 @@ resource "google_cloud_run_service" "default" {
       service_account_name = google_service_account.service_account.account_id
     }
   }
-
   traffic {
     percent         = 100
     latest_revision = true
