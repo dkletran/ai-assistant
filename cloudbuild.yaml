@@ -9,8 +9,8 @@ steps:
   - id: build-push-docker-image
     name: "gcr.io/cloud-builders/docker"
     script: |
-      docker build --pull -t europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA .
-      docker push europe-west9-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA
+      docker build --pull -t europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA .
+      docker push europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA
   - id: deploy-infra
     name: "hashicorp/terraform"
     script: |
