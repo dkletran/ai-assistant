@@ -5,7 +5,7 @@ resource "google_service_account" "service_account" {
 
 resource "google_project_iam_binding" "sa_binding" {
   project = "ai-assistant-399819"
-  role    = "roles/aiplatform.viewer"
+  role    = "roles/aiplatform.user"
   members = ["serviceAccount:${google_service_account.service_account.email}"]
 }
 
