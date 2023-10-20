@@ -40,7 +40,7 @@ def test_get_chat_response_call_langchain_with_correct_history(chat_model):
         {"role": "user", "content": "message 2"},
     ]
     get_chat_response(chat_history)
-    with open("./prompt.txt") as f:
+    with open(f"{os.path.dirname(__file__)}/prompt.txt") as f:
         prompt = f.read()
     chat_model.return_value.assert_called_with(
         [
