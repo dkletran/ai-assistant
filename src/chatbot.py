@@ -1,6 +1,6 @@
 import os
 
-from langchain.chat_models import ChatVertexAI
+from langchain.chat_models import ChatOpenAI
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 
@@ -12,7 +12,7 @@ def _make_langchain_message(message):
 
 
 def get_chat_response(chat_history):
-    chat = ChatVertexAI(model_name=os.environ.get("MODEL_NAME", "chat-bison@001"))
+    chat = ChatOpenAI(model=os.environ.get("MODEL_NAME", "gpt-3.5-turbo"))
     with open(f"{os.path.dirname(__file__)}/prompt.txt") as f:
         prompt = f.read()
     system_message = SystemMessage(content=prompt)

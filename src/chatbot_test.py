@@ -7,7 +7,7 @@ from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 from chatbot import get_chat_response
 
-MODEL_NAME = "chat-bison@001"
+MODEL_NAME = "gpt-3.5-turbo"
 
 
 @pytest.fixture(autouse=True)
@@ -16,13 +16,13 @@ def patch_env():
         yield
 
 
-@mock.patch("chatbot.ChatVertexAI")
+@mock.patch("chatbot.ChatOpenAI")
 def test_get_chat_response_init_chat_model_with_correct_params(chat_model):
     get_chat_response([])
-    chat_model.assert_called_with(model_name=MODEL_NAME)
+    chat_model.assert_called_with(model=MODEL_NAME)
 
 
-@mock.patch("chatbot.ChatVertexAI")
+@mock.patch("chatbot.ChatOpenAI")
 def test_get_chat_response_return_correctly(chat_model):
     text_response = "response 1"
     chat_model.return_value.return_value = AIMessage(content=text_response)
@@ -31,7 +31,7 @@ def test_get_chat_response_return_correctly(chat_model):
     assert_that(chat_response, equal_to(text_response))
 
 
-@mock.patch("chatbot.ChatVertexAI")
+@mock.patch("chatbot.ChatOpenAI")
 def test_get_chat_response_call_langchain_with_correct_history(chat_model):
     user_message = "message 1"
     chat_history = [
