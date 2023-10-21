@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "${local.region}-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${var.image_tag}"
+        image = var.image_name
         ports {
           container_port = 8501
         }
