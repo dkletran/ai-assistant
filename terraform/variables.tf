@@ -1,4 +1,4 @@
-variable "image_tag" {
+variable "image_name" {
   type        = string
-  description = "tag used for cloud run deployment"
+  description = "image:tag used for cloud run deployment"
 }

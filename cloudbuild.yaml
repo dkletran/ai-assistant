@@ -9,14 +9,19 @@ steps:
   - id: build-push-docker-image
     name: "gcr.io/cloud-builders/docker"
     script: |
-      docker build --pull -t europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA .
-      docker push europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:$COMMIT_SHA
+      docker build --pull -t ${LOCATION}-docker.pkg.dev/${PROJECT_ID}/$_DOCKER_REPO/ai-assistant:$COMMIT_SHA .
+      docker push ${LOCATION}-docker.pkg.dev/${PROJECT_ID}/$_DOCKER_REPO/ai-assistant:$COMMIT_SHA
   - id: deploy-infra
     name: "hashicorp/terraform"
     script: |
       cd terraform 
       terraform init 
-      terraform apply --auto-approve -var="image_tag=$COMMIT_SHA"
+      terraform apply --auto-approve -var="image_name=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/$_DOCKER_REPO/ai-assistant:$COMMIT_SHA"
+substitutions:
+  _DOCKER_REPO: docker-repo
 options:
   env:
     - "COMMIT_SHA=$COMMIT_SHA"
+    - "LOCATION=$LOCATION"
+    - "PROJECT_ID=$PROJECT_ID"
+    - "_DOCKER_REPO=$_DOCKER_REPO"
