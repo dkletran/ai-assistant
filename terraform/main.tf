@@ -4,17 +4,17 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_project_iam_binding" "sa_binding" {
-  project = "ai-assistant-399819"
+  project = local.project
   role    = "roles/aiplatform.user"
   members = ["serviceAccount:${google_service_account.service_account.email}"]
 }
 
 resource "google_cloud_run_service" "default" {
-  project  = "ai-assistant-399819"
+  project  = local.project
   name     = "ai-assistant"
-  location = "europe-west1"
+  location = local.region
   metadata {
-    namespace = "ai-assistant-399819"
+    namespace = local.project
     annotations = {
       "autoscaling.knative.dev/maxScale" = "5"
     }
@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "europe-west1-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${var.image_tag}"
+        image = "${local.region}-docker.pkg.dev/ai-assistant-399819/docker-repo/ai-assistant:${var.image_tag}"
         ports {
           container_port = 8501
         }
