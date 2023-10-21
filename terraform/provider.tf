@@ -1,4 +1,4 @@
 provider "google" {
-  project = "ai-assistant-399819"
-  region  = "europe-west1"
+  project = local.project
+  region  = local.region
 }
