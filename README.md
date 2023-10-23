@@ -35,6 +35,7 @@ Here are the steps to configure the CD pipeline to deploy the chatbot to your GC
 - A bucket in this project to store Terraform states
 - A secret to store your OpenAI API token
 - A Docker repository for Docker images in Artifact Registry
+- Optional: a verified custom domain name that can be use to connect to your service
 
 ### Configuration:
 
@@ -42,5 +43,6 @@ Here are the steps to configure the CD pipeline to deploy the chatbot to your GC
 2. Customize the chat prompt for your AI assistant: `src/prompt.txt`
 3. Configure your bucket for Terraform states: `terraform/backend.tf`
 4. Configure your project, region, and OpenAI key secret name in `terraform/locals.tf`
-5. Configure your Docker repository (in Artifact Registry) in `cloudbuild.yaml`, section `substitutions`
-6. In Cloud Build, create a trigger that listens to the `push to master` event of your GitHub repository. Detail instructions could be found here: https://cloud.google.com/build/docs/automating-builds/github/build-repos-from-github?generation=2nd-gen
+5. Configure your Docker repository (in Artifact Registry) in `cloudbuild.yaml`, section `substitutions`, variable `_DOCKER_REPO`
+6. Optional: if you have a custom domain name, configure it in `cloudbuild.yaml`, section `substitutions`, variable `_DOMAIN_NAME`; otherwise just remove the variable
+7. In Cloud Build, create a trigger that listens to the `push to master` event of your GitHub repository. Detail instructions could be found here: https://cloud.google.com/build/docs/automating-builds/github/build-repos-from-github?generation=2nd-gen
