@@ -16,12 +16,16 @@ steps:
     script: |
       cd terraform 
       terraform init 
-      terraform apply --auto-approve -var="image_name=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/$_DOCKER_REPO/ai-assistant:$COMMIT_SHA"
+      terraform apply --auto-approve \
+        -var="image_name=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/$_DOCKER_REPO/ai-assistant:$COMMIT_SHA" \
+        -var="domain_name=$_DOMAIN_NAME"
 substitutions:
   _DOCKER_REPO: docker-repo
+  #_DOMAIN_NAME: ai-assistant.dkletran.com
 options:
   env:
     - "COMMIT_SHA=$COMMIT_SHA"
     - "LOCATION=$LOCATION"
     - "PROJECT_ID=$PROJECT_ID"
     - "_DOCKER_REPO=$_DOCKER_REPO"
+    - "_DOMAIN_NAME=$_DOMAIN_NAME"
