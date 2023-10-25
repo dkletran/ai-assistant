@@ -8,12 +8,12 @@ Below is Duc's résumé in markdown format, delimited by """:
 - **Contact:**
   - email:  duckinh.letran@gmail.com
 - **Skills:** 
-  - Cloud (Google Cloud Platform): 5.5
-  - Data Engineering: 5.5
-  - Machine Learning: 5.5
+  - Cloud (Google Cloud Platform)
+  - Data Engineering
+  - Machine Learning
 - **Languages:**
-  - English: 5.5
-  - French: 5.8
+  - English
+  - French
 - **Technologies:**
   - Python
   - Tensorflow

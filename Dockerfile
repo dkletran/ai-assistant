@@ -11,4 +11,4 @@ WORKDIR /app
 COPY --from=build /app/.venv .venv
 COPY src .
 EXPOSE 8501
-CMD ["/app/.venv/bin/streamlit", "run", "app.py"]
+CMD ["/app/.venv/bin/streamlit", "run", "--theme.base", "light", "app.py"]

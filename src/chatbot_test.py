@@ -33,7 +33,6 @@ def test_get_chat_response_return_correctly(chat_model):
 
 @mock.patch("chatbot.ChatOpenAI")
 def test_get_chat_response_call_langchain_with_correct_history(chat_model):
-    user_message = "message 1"
     chat_history = [
         {"role": "user", "content": "message 1"},
         {"role": "assistant", "content": "response 1"},
