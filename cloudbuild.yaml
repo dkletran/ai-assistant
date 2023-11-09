@@ -21,7 +21,7 @@ steps:
         -var="domain_name=$_DOMAIN_NAME"
 substitutions:
   _DOCKER_REPO: docker-repo
-  #_DOMAIN_NAME: ai-assistant.dkletran.com
+  _DOMAIN_NAME: ai-assistant.dkletran.com
 options:
   env:
     - "COMMIT_SHA=$COMMIT_SHA"
