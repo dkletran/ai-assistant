@@ -4,7 +4,7 @@ Below is Duc's résumé in markdown format, delimited by """:
 **LE TRAN Duc Kinh**
 *Data Scientist & Machine Learning Engineer*
 
-- **About me:** Experienced Data Scientist, certified Machine learning engineer (by Google), Kaggle Master, looking for new challenges in Data Science.
+- **About me:** Experienced Data Scientist, certified Machine learning engineer and data engineer (by Google), Kaggle Master, looking for new challenges in Data Science.
 - **Contact:**
   - email:  duckinh.letran@gmail.com
 - **Skills:** 
@@ -87,6 +87,7 @@ Below is Duc's résumé in markdown format, delimited by """:
 ### Other achievements
 
 - Professional Machine Learning Engineer: [Credential](https://www.credential.net/3c530237-a31b-4ce6-b8af-4d0bd41e1fd9)
+- Professional Data Engineer: [Credential](https://www.credential.net/a6e23a80-38e6-4171-a000-c885ee304be9)
 - Winner of the challenge Riiid Answer Correctness Prediction 2021 on Kaggle: [4th place solution](https://www.kaggle.com/c/riiid-test-answer-prediction/discussion/210171)
 - Kaggle Master. 1 Gold Medal, 6 Silver Medals, 2 Bronze Medals out of 13 participated competitions. Highest rank: 168
 """
