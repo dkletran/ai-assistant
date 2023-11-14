@@ -5,9 +5,14 @@ resource "google_service_account" "service_account" {
 
 resource "google_project_iam_binding" "sa_binding" {
   project = local.project
-  role    = "roles/aiplatform.user"
+  for_each = toset([
+    "roles/secretmanager.secretAccessor",
+    "roles/aiplatform.user"
+  ])
+  role    = each.key
   members = ["serviceAccount:${google_service_account.service_account.email}"]
 }
+
 
 resource "google_cloud_run_v2_service" "default" {
   project  = local.project
@@ -23,8 +28,13 @@ resource "google_cloud_run_v2_service" "default" {
         container_port = 8501
       }
       env {
-        name  = "OPENAI_API_KEY"
-        value = data.google_secret_manager_secret_version.openai_api_key.secret_data
+        name = "OPENAI_API_KEY"
+        value_source {
+          secret_key_ref {
+            secret  = local.openai_api_key_secret
+            version = "latest"
+          }
+        }
       }
     }
     service_account = google_service_account.service_account.account_id
@@ -34,7 +44,7 @@ resource "google_cloud_run_v2_service" "default" {
     percent = 100
     type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
   }
-
+  depends_on = [google_project_iam_binding.sa_binding]
 }
 
 resource "google_cloud_run_domain_mapping" "default" {
