@@ -7,7 +7,7 @@ from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 from chatbot import get_chat_response
 
-MODEL_NAME = "gpt-3.5-turbo"
+MODEL_NAME = "gpt-4-1106-preview"
 
 
 @pytest.fixture(autouse=True)

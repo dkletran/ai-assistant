@@ -12,7 +12,7 @@ def _make_langchain_message(message):
 
 
 def get_chat_response(chat_history):
-    chat = ChatOpenAI(model=os.environ.get("MODEL_NAME", "gpt-3.5-turbo"))
+    chat = ChatOpenAI(model=os.environ.get("MODEL_NAME", "gpt-4-1106-preview"))
     with open(f"{os.path.dirname(__file__)}/prompt.txt") as f:
         prompt = f.read()
     system_message = SystemMessage(content=prompt)
